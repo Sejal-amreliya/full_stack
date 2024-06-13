@@ -1,0 +1,30 @@
+
+.dark-theme {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333
+  }
+
+  .table {
+    width: 80%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #777;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #666;
+    color: #fff;
+  }
+  
+  td {
+    background-color: #888;
+  }
+  
