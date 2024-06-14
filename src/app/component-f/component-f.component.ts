@@ -7,9 +7,11 @@ import { UserService } from '../user.service';
   styleUrls: ['./component-f.component.scss']
 })
 export class ComponentFComponent {
+  // Variable to hold the URL of the PDF
   pdfSrc!: string;
 
   constructor(private userService: UserService) {
+    // Generate the PDF and set the URL for viewing
     this.userService.generatePdf().subscribe(data => {
       const blob = new Blob([data], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);

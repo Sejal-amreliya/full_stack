@@ -10,18 +10,18 @@ const routes: Routes = [
     path:'',
     component:ComponentCComponent
   },
-  {
-    path: 'add-user',
-    component: ComponentAComponent,
-  },
-  {
-    path:'user-data',
-    component:ComponentBComponent
-  },
-  {
-    path:'pdf',
-    component:ComponentFComponent
-  }
+  // {
+  //   path: 'add-user',
+  //   component: ComponentAComponent,
+  // },
+  // {
+  //   path:'user-data',
+  //   component:ComponentBComponent
+  // },
+  // {
+  //   path:'pdf',
+  //   component:ComponentFComponent
+  // }
 
 ];
 

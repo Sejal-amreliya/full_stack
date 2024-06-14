@@ -9,6 +9,8 @@ import { ComponentCComponent } from './component-c/component-c.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentFComponent } from './component-f/component-f.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ComponentDComponent } from './component-d/component-d.component';
+import { ComponentEComponent } from './component-e/component-e.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
     ComponentAComponent,
     ComponentBComponent,
     ComponentCComponent,
-    ComponentFComponent
+    ComponentFComponent,
+    ComponentDComponent,
+    ComponentEComponent
   ],
   imports: [
     BrowserModule,
