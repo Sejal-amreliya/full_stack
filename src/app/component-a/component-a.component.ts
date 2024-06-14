@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 
@@ -9,7 +9,7 @@ import { UserService } from '../user.service';
 })
 export class ComponentAComponent {
   form!: FormGroup;
-
+  @Output() userAdded = new EventEmitter<any>();
   constructor(private fb: FormBuilder, private userService: UserService) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -21,7 +21,8 @@ export class ComponentAComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.userService.addUser(this.form.value).subscribe();
+      // this.userService.addUser(this.form.value).subscribe();
+      this.userAdded.emit(this.form.value);
       this.form.reset();
     }
   }

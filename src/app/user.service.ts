@@ -22,6 +22,10 @@ export class UserService {
     return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
   }
 
+  editUser(user: any): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/users/${user.id}`, user);
+  }
+  
   generatePdf(): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/pdf`, { responseType: 'blob' });
   }

@@ -1,5 +1,5 @@
-<div class="table-container">
-  <table>
+<!-- <div class="table-container">
+  <table class="table table-hover table-dark">
     <thead>
       <tr>
         <th>Name</th>
@@ -15,13 +15,67 @@
         <td>{{ user?.email }}</td>
         <td>{{ user?.phoneNumber }}</td>
         <td>{{ user?.address }}</td>
-        <td>
-          <button (click)="editUser(user)">Edit</button>
-          <button (click)="deleteUser(user?.id)">Delete</button>
+        <td class="d-flex justify-content-center align-items-center gap-2">
+          <button (click)="editUser(user)" class="btn btn-outline-info">Edit</button>
+          <button (click)="deleteUser(user?.id)" class="btn btn-outline-danger">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
-  <button (click)="generatePdf()">Generate PDF</button>
-  <button (click)="downloadPdf()">Download PDF</button>
+  <div class="d-flex justify-content-start align-items-center gap-2">
+    <button (click)="onGeneratePdf()" class="btn btn-primary">Generate PDF</button>
+    <button (click)="onDownloadPdf()" class="btn btn-primary">Download PDF</button>
+  </div>
+ 
+</div> -->
+<div class="table-container">
+  <table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let user of users; let i = index">
+        <tr>
+          <ng-container *ngIf="!user.editing; else editRow">
+            <td>{{ user?.name }}</td>
+            <td>{{ user?.email }}</td>
+            <td>{{ user?.phoneNumber }}</td>
+            <td>{{ user?.address }}</td>
+            <td class="d-flex justify-content-center align-items-center gap-2">
+              <button (click)="editUser(user)" class="btn btn-outline-info">Edit</button>
+              <button (click)="deleteUser(user?.id)" class="btn btn-outline-danger">Delete</button>
+            </td>
+          </ng-container>
+          <ng-template #editRow>
+            <td>
+              <input [(ngModel)]="user.name" type="text" class="form-control" />
+            </td>
+            <td>
+              <input [(ngModel)]="user.email" type="email" class="form-control" />
+            </td>
+            <td>
+              <input [(ngModel)]="user.phoneNumber" type="tel" class="form-control" />
+            </td>
+            <td>
+              <input [(ngModel)]="user.address" type="text" class="form-control" />
+            </td>
+            <td>
+              <button (click)="saveUser(user)" class="btn btn-success">Save</button>
+              <button (click)="cancelEdit(i)" class="btn btn-secondary">Cancel</button>
+            </td>
+          </ng-template>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-start align-items-center gap-2">
+    <button (click)="onGeneratePdf()" class="btn btn-primary">Generate PDF</button>
+    <button (click)="onDownloadPdf()" class="btn btn-primary">Download PDF</button>
+  </div>
 </div>

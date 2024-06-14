@@ -7,7 +7,9 @@ import { UserService } from '../user.service';
   styleUrls: ['./component-b.component.scss']
 })
 export class ComponentBComponent {
-  users:any = [];
+  @Input() users: any[] = [];
+  @Output() generatePdf = new EventEmitter<void>();
+  @Output() downloadPdf= new EventEmitter<void>();
 
   constructor(private userService: UserService) {}
 
@@ -16,33 +18,31 @@ export class ComponentBComponent {
   }
 
   loadUsers(): void {
-    this.userService.getUsers().subscribe((users:any) => this.users = users);
+    this.userService.getUsers().subscribe((users: any[]) => {
+      this.users = users.map(user => ({ ...user, editing: false }));
+    });
+  }
+  editUser(user: any): void {
+    user.editing = true;
   }
 
-  editUser(user:any): void {
-    // Add logic for editing user
+  saveUser(user: any): void {
+    delete user.editing; 
+    this.userService.editUser(user).subscribe(() => this.loadUsers());
   }
 
+  cancelEdit(user: any): void {
+    user.editing = false;
+  }
   deleteUser(id: number): void {
     this.userService.deleteUser(id).subscribe(() => this.loadUsers());
   }
 
-  generatePdf(): void {
-    this.userService.generatePdf().subscribe((data:any) => {
-      const blob = new Blob([data], { type: 'application/pdf' });
-      const url = window.URL.createObjectURL(blob);
-      window.open(url);
-    });
+  onGeneratePdf() {
+    this.generatePdf.emit();
   }
-
-  downloadPdf(): void {
-    this.userService.generatePdf().subscribe((data:any) => {
-      const blob = new Blob([data], { type: 'application/pdf' });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'users.pdf';
-      link.click();
-    });
+  onDownloadPdf(){
+    this.downloadPdf.emit();
   }
 }
+
